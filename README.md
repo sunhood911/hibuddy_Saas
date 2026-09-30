@@ -18,7 +18,7 @@ Looking for an **alternative to subscription platforms** or a **paid membership 
 ### Features
 
 - **Automated gatekeeper** — new members join only after payment; non-payers are rejected automatically
-- **Owner subscription payment** — free diamonds can be claimed for now to use the service at no cost; ~~**Paddle** and **USDT (TRC-20)** coming soon~~
+- **Owner subscription payment** — free diamonds can be claimed for now (on the **"My Group Owner"** page in the bot) to use the service at no cost; ~~**USDT (TRON)** and **USDT (Solana)** coming soon~~
 - **Auto expiry & kick** — membership durations are tracked automatically; expired members are removed with no manual work
 - **Payments go directly to the group owner** — the platform never holds your funds
 - **Owner receiving wallets** — **USDT (TRON)** now supported; ~~**USDT (Solana)** coming soon~~
@@ -73,7 +73,7 @@ Hibuddy是一款**电报群组門禁服务系统**，可讓**付費群組實現�
 ### 產品功能
 
 - **全自動門禁**——付款成功後才可入群，未付款者自動攔截
-- **群主订阅支付**——暂时可免费领取钻石以获取免费服务，~~即將支持**Paddle**和**USDT（TRC-20）**~~
+- **群主订阅支付**——暂时可免费领取钻石(机器人中**我的群主**页面)以免费使用本服务，~~即將支持**USDT（TRON）**和**USDT（Solana）**~~
 - **到期自動踢人**——會員時長自動追蹤，到期成員無需手動移除
 - **款項直達群主**——平台不經手、不凍結您的資金
 - **群主收款錢包**——已支持**USDT（TRON）**，~~即將支持**USDT（Solana）**~~
@@ -128,7 +128,7 @@ Hibuddy — это **бот контроля доступа для Телегр�
 ### Возможности
 
 - **Автоматический шлагбаум** — новые участники попадают в группу только после оплаты
-- **Оплата подписки владельцем** — пока можно бесплатно получить алмазы и пользоваться сервисом без затрат; ~~скоро появятся **Paddle** и **USDT (TRC-20)**~~
+- **Оплата подписки владельцем** — пока можно бесплатно получить алмазы (на странице **«Мой владелец группы»** в боте) и пользоваться сервисом без затрат; ~~скоро появятся **USDT (TRON)** и **USDT (Solana)**~~
 - **Автоматический кик по истечении** — срок подписки отслеживается автоматически, истёкшие участники удаляются без ручной работы
 - **Оплата идёт напрямую владельцу группы** — платформа не удерживает ваши средства
 - **Кошельки для приёма платежей** — **USDT (TRON)** уже поддерживается; ~~скоро появится поддержка **USDT (Solana)**~~
@@ -183,7 +183,7 @@ Hibuddy es un **bot de control de acceso para Telegram** que automatiza tu grupo
 ### Funciones
 
 - **Portero automático** — los nuevos miembros solo entran tras pagar; los que no pagan son rechazados automáticamente
-- **Pago de suscripción del administrador** — por ahora se pueden obtener diamantes gratis y usar el servicio sin coste; ~~**Paddle** y **USDT (TRC-20)** próximamente~~
+- **Pago de suscripción del administrador** — por ahora se pueden obtener diamantes gratis (en la página **«Mi administrador de grupo»** del bot) y usar el servicio sin coste; ~~**USDT (TRON)** y **USDT (Solana)** próximamente~~
 - **Expiración y expulsión automáticas** — la duración de la membresía se controla sola; los miembros caducados se eliminan sin trabajo manual
 - **Los pagos llegan directamente al administrador** — la plataforma nunca retiene tus fondos
 - **Billeteras del administrador** — **USDT (TRON)** ya disponible; ~~próximamente se admitirá **USDT (Solana)**~~
