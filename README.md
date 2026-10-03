@@ -21,21 +21,21 @@ Simply put, it does three things for group owners:
 
 The whole process is fully automated — owners don't need to watch the group, reconcile statements, or manually add/remove people.
 
-Currently it supports **USDT (TRC20 network)** for payments, and the interface is available in **English / Chinese / Russian / Spanish**.
+Currently it supports **USDT (TRON TRC20 and Solana SPL)** for payments, and the interface is available in **English / Chinese / Russian / Spanish**.
 
 ### 2. Why we built this
 
-There are plenty of tools for paid groups and subscription content (InviteMember, Whop, Patreon, etc.), but they share common pain points:
+There are plenty of tools for paid groups and subscription content in the market today, but they share common pain points:
 
-- **Too expensive**: typically starting with a **monthly / subscription fee** — e.g., InviteMember costs tens of dollars a month, whether or not you make any sales.
-- **High and opaque platform cuts**: platforms like Whop and Patreon **take a cut** from what members pay; member payments go to the platform first, then get settled to you, and it's often unclear how much was deducted.
+- **Too expensive**: typically starting with a **monthly / subscription fee** — often tens of dollars a month, whether or not you make any sales.
+- **High and opaque platform cuts**: most platforms **take a cut** from what members pay; member payments go to the platform first, then get settled to you, and it's often unclear how much was deducted.
 - **Unfriendly to small owners (important)**: for owners just starting out with few members, the monthly fee alone is a fixed burden.
 
 **Hibuddy aims to do the opposite:**
 
 - **No monthly fee, no subscription fee** — costs are incurred only when a member actually completes a transaction.
 - **100% of the member's money goes to the owner's wallet** — the platform never touches it and never takes a cut from members.
-- The platform only deducts a small service fee from the owner's diamond balance at a **fixed low rate** when an order completes — **transparent, predictable, no hidden charges**.
+- The platform only deducts a service fee from the owner's diamond balance **calculated at a 5% rate** when an order completes (anything under 1 diamond is rounded up to 1 diamond; low unit prices carry a clearly disclosed uplift) — **transparent, predictable, no hidden charges**.
 
 In one sentence: **you pay only when you make a sale, money goes directly to the owner, and the rate is transparent.**
 
@@ -50,20 +50,20 @@ Core pain points it solves:
 | Manual reconciliation and adding members after payment | Owner checks each payment, then invites manually | Auto-detects arrival, instantly sends invite link |
 | Non-payers sneaking into the group | Manual patrol | Only members within the valid period are allowed |
 | Expired members overstaying | Manually track time, manually kick | Auto-remove on expiry |
-| Heavy monthly fee / platform cut pressure | Fixed monthly fee + cut | No monthly fee; fixed rate charged only on completion |
+| Heavy monthly fee / platform cut pressure | Fixed monthly fee + cut | No monthly fee; fee calculated at 5% only on completion (rounded up to whole diamonds, disclosed uplift on low prices) |
 | Unease about the platform holding funds | Money goes to the platform first, then settles | Money goes directly to the owner's wallet |
 
 ### 4. How it works now
 
 Hibuddy's billing unit is called a **Diamond** — this is the "balance" on the owner's side. The logic is simple:
 
-> 💎 **1 diamond ≈ 0.1 USD** (i.e., $1 ≈ 10 diamonds).
+> 💎 **1 diamond ≈ 0.1 USD** (i.e., 1 USD ≈ 10 diamonds).
 
 - Owners **top up diamonds** (via USDT, with top-up bonuses).
-- When a member pays to join, the money goes **in full to the owner's wallet**; the platform only deducts the service fee for that order from the owner's diamonds at a **fixed rate** (currently ~5%) at the moment of completion.
+- When a member pays to join, the money goes **in full to the owner's wallet**; the platform only deducts the service fee for that order from the owner's diamonds **calculated at a 5% rate** (under 1 diamond counts as 1 diamond; low unit prices come with a clearly disclosed uplift) at the moment of completion.
 - No completion, no charge — and no monthly fee at all.
 
-For example: a group sets the entry fee at **$20**. A member pays $20 (in full to the owner's wallet), and the platform deducts the equivalent of $1 (about **10 diamonds**) from the owner as the service fee at 5%. The owner actually receives the member's $20.
+For example: a group sets the entry fee at **20 USD**. A member pays 20 USD (in full to the owner's wallet), and the platform deducts the equivalent of 1 USD (about **10 diamonds**) from the owner as the service fee at 5%. The owner actually receives the member's 20 USD.
 
 After a member pays, the bot automatically identifies which order it is by the **amount precise to the cent** (the same wallet receives transfers from many people at once); once matched, access is granted immediately. So the payment page gives a special reminder: **please transfer the exact amount shown on the page**.
 
@@ -74,12 +74,12 @@ Regarding expiry, the bot reminds members to renew before expiry and automatical
 1. **Enter the bot**: tap the **promotion link** shared by the owner, or search `@hibuddy_ai_bot` on Telegram and send `/start`.
 2. **Choose a group**: the bot lists the paid groups you can join, showing the **entry fee** and **service duration**; tap the one you want.
 3. **Place an order and pay**: after choosing a payment method, you enter the payment page, which shows the **exact USDT amount** and the **receiving address / QR code**.
-4. **Transfer**: open your wallet (TronLink, Trust Wallet, Binance, etc.), choose the **TRC20 network**, and send the **exact amount shown on the page**.
+4. **Transfer**: open your wallet (TronLink, Trust Wallet, Binance, etc.), choose the **corresponding network (TRON TRC20 or Solana SPL)**, and send the **exact amount shown on the page**.
 5. **Wait for auto-access**: the page automatically detects the arrival — **no extra action needed**. After confirmation you'll receive a **one-time invite link**; tap to join.
 
 ⚠️ A few reminders:
 - Orders are **valid for 15 minutes**; if it times out, please don't pay — just place a new order.
-- Be sure to transfer the **exact amount shown on the page** and use the **correct TRC20 network**, otherwise it may not be auto-detected / may cause a loss.
+- Be sure to transfer the **exact amount shown on the page** and use the **correct network (TRON TRC20 / Solana SPL)**, otherwise it may not be auto-detected / may cause a loss.
 - **Payment goes directly to the owner's wallet** — no extra fees beyond the entry fee shown.
 
 ### 6. As a group owner, what do I do?
@@ -90,8 +90,8 @@ Regarding expiry, the bot reminds members to renew before expiry and automatical
    → After joining, the bot **auto-binds to you** (bound to whoever invited it), with no extra verification needed.
 2. **Message the bot privately** and send `/start`.
 3. Tap **"I am a Group Owner"** to enter the group management page.
-4. **Add a receiving wallet**: enter your USDT (TRC20) receiving address.
-   > 💡 The wallet configured by the owner is the payment method for potential members. **Currently supports USDT (TRC20 network)**; **USDT (Solana network) is scheduled but not yet supported**.
+4. **Add a receiving wallet**: enter your USDT (TRON TRC20 or Solana SPL) receiving address.
+   > 💡 The wallet configured by the owner is the payment method for potential members. **Currently supports USDT (TRON TRC20 and Solana SPL)**; **USDT (BSC network) is under development and not yet supported**.
 5. **Configure the group**: select the wallet, set the **entry price** and **service duration (days)**, then **enable hosting mode**.
 
 Once configured, your group officially enters "auto-charging" status.
@@ -99,7 +99,7 @@ Once configured, your group officially enters "auto-charging" status.
 #### Step 2: Daily operation (basically hands-off)
 
 - After a member pays, the system auto-reconciles and grants access; **your wallet receives the full USDT instantly**.
-- For each completed order, the system deducts a little diamond from you at a fixed rate as the service fee — no completion, no deduction.
+- For each completed order, the system deducts the service fee from your diamonds **calculated at a 5% rate** (under 1 diamond counts as 1 diamond; low unit prices come with a clearly disclosed uplift) — no completion, no deduction.
 - Expired members are auto-removed by the system; you don't need to manage manually.
 
 #### Step 3: On-demand actions
@@ -113,9 +113,9 @@ Once configured, your group officially enters "auto-charging" status.
 
 ### 7. Limited-time offer
 
-> 🎁 **Currently you can claim 30 diamonds on an unlimited loop in the bot** — enough to get your group running and try it out at zero cost.
+> 🎁 **For a limited time, you can claim 30 diamonds in the bot** — enough to get your group running and try it out at zero cost.
 >
-> If the unlimited claim channel is closed later, we'll most likely give existing users a solid subsidy (how exactly — let's figure it out together).
+> Once this limited-time claim window closes, we'll most likely give existing users a solid subsidy (how exactly — let's figure it out together).
 >
 > In one sentence: **joining now is a win; early birds don't lose out.**
 
@@ -150,21 +150,21 @@ Hibuddy 是一個跑在 Telegram 上的**付費入群機器人**。
 
 整個過程全自動，群主不需要盯著群、對帳單、手動拉人踢人。
 
-目前支援 **USDT（TRC20 網路）** 收款，介面支援**英 / 中 / 俄 / 西**四種語言。
+目前支援 **USDT（TRON TRC20 與 Solana SPL）** 收款，介面支援**英 / 中 / 俄 / 西**四種語言。
 
 ### 二、為什麼要做這個
 
-市面上做付費群、訂閱制內容的工具不少（InviteMember、Whop、Patreon 等），但它們有個共同的痛點：
+市面上做付費群、訂閱制內容的工具不少，但它們有個共同的痛點：
 
-- **收費太貴**：普遍是**月費 / 訂閱費**起步，比如 InviteMember 每月幾十美金，不管你有沒有成交都要交錢。
-- **平台抽成高、且不透明**：Whop、Patreon 這類平台會從成員付的錢裡**抽成**，成員的付款先進平台、再結算給你，中間扣了多少往往說不清。
+- **收費太貴**：普遍是**月費 / 訂閱費**起步，動輒每月幾十美金，不管你有沒有成交都要交錢。
+- **平台抽成高、且不透明**：多數平台會從成員付的錢裡**抽成**，成員的付款先進平台、再結算給你，中間扣了多少往往說不清。
 - **對小群主不友好（重要）**：剛起步、成員不多的群主，光是月費就是一筆固定負擔。
 
 **Hibuddy 想做的正好相反：**
 
 - **不收月費、不收訂閱費**，只有成員真正成交了才產生費用。
 - **成員的錢 100% 進群主錢包**，平台不經手、不抽成員的錢。
-- 平台只在每單成交時，按**固定的低費率**從群主的餘額裡扣一點點服務費，**透明、可預期、沒有隱藏收費**。
+- 平台只在每單成交時，按 **5% 的費率計算**從群主的餘額裡扣服務費（不滿一顆鑽石按一顆算，低單價時會有明示上浮），**透明、可預期、沒有隱藏收費**。
 
 一句話：**走單才付費，錢直達群主，費率透明。**
 
@@ -179,20 +179,20 @@ Hibuddy 是一個跑在 Telegram 上的**付費入群機器人**。
 | 收款後手動核對、手動拉人 | 群主逐筆對帳，再手動邀請 | 到帳自動識別，秒發邀請連結 |
 | 沒付款的人混進群 | 人肉巡查 | 只放行有效期內成員 |
 | 過期的人賴著不走 | 手動記時間、手動踢 | 到期自動移出 |
-| 平台月費 / 抽成壓力大 | 固定月費 + 抽成 | 無月費，成交才按固定費率扣 |
+| 平台月費 / 抽成壓力大 | 固定月費 + 抽成 | 無月費，成交才按 5% 費率計算扣費（不滿一顆鑽石按一顆算，低單價有明示上浮） |
 | 平台經手資金不放心 | 錢先進平台再結算 | 錢直接進群主錢包 |
 
 ### 四、現在是怎麼運作的
 
 Hibuddy 的計費單位叫**鑽石（Diamond）**，這是群主這邊的「餘額」。邏輯很簡單：
 
-> 💎 **1 顆鑽石折合約 0.1 USD**（即 $1 ≈ 10 顆鑽石）。
+> 💎 **1 顆鑽石折合約 0.1 USD**（即 1 USD ≈ 10 顆鑽石）。
 
 - 群主**充值鑽石**（用 USDT 充值，有充值贈送）。
-- 成員付費入群時，錢**全額進群主錢包**；平台只在成交那一刻，按**固定費率**（當前約 5%）從群主鑽石裡扣掉這一單的服務費。
+- 成員付費入群時，錢**全額進群主錢包**；平台只在成交那一刻，按 **5% 費率計算**（不滿 1 顆鑽石按 1 顆算，低單價時會有明示上浮）從群主鑽石裡扣掉這一單的服務費。
 - 沒有成交就不扣費，也沒有任何月費。
 
-舉個例子：某群入群費設為 **$20**，成員付了 $20（全額進群主錢包），平台按 5% 扣群主相當於 $1（約 **10 顆鑽石**）作為服務費。群主實際到手就是成員的 $20。
+舉個例子：某群入群費設為 **20 USD**，成員付了 20 USD（全額進群主錢包），平台按 5% 扣群主相當於 1 USD（約 **10 顆鑽石**）作為服務費。群主實際到手就是成員的 20 USD。
 
 成員付款後，機器人靠「**精確到分的金額**」來自動識別是哪一筆訂單（同一錢包會同時收到很多人的轉帳），匹配成功後立即放行。所以支付頁會特別提醒：**請轉帳頁面顯示的準確金額**。
 
@@ -203,12 +203,12 @@ Hibuddy 的計費單位叫**鑽石（Diamond）**，這是群主這邊的「餘�
 1. **進入機器人**：點擊群主分享的**推廣連結**，或在 Telegram 搜尋 `@hibuddy_ai_bot` 發送 `/start`。
 2. **選群**：機器人會列出可加入的付費群，顯示**入群費用**和**服務時長**，點你想進的那個。
 3. **下單付款**：選擇支付方式後進入支付頁，頁面會顯示**準確的 USDT 金額**和**收款地址 / 二維碼**。
-4. **轉帳**：打開你的錢包（TronLink、Trust Wallet、幣安等），選 **TRC20 網路**，轉出**頁面顯示的精確金額**。
+4. **轉帳**：打開你的錢包（TronLink、Trust Wallet、幣安等），選**對應網路（TRON TRC20 或 Solana SPL）**，轉出**頁面顯示的精確金額**。
 5. **等自動放行**：頁面會自動偵測到帳，**無需任何額外操作**。確認後你會收到一個**一次性邀請連結**，點擊即可進群。
 
 ⚠️ 幾個小提醒：
 - 訂單**有效期 15 分鐘**，超時請勿付款，重新下單即可。
-- 一定要轉**頁面顯示的準確金額**、用**正確的 TRC20 網路**，否則可能無法自動識別 / 造成損失。
+- 一定要轉**頁面顯示的準確金額**、用**正確的網路（TRON TRC20／Solana SPL）**，否則可能無法自動識別 / 造成損失。
 - **付款直達群主錢包**，除顯示的入群費外，沒有額外費用。
 
 ### 六、作為群主，我該怎麼做
@@ -219,8 +219,8 @@ Hibuddy 的計費單位叫**鑽石（Diamond）**，這是群主這邊的「餘�
    → 機器人入群後會**自動綁定給你**（誰邀請的就綁給誰），無需額外驗證。
 2. **私聊機器人**，發送 `/start`。
 3. 點擊 **「我是群主」**，進入群組管理頁面。
-4. **新增收款錢包**：填入你的 USDT（TRC20）收款地址。
-   > 💡 群主配置的收款錢包，即潛在群員的支付方式。**目前支援 USDT（TRC20 網路）交易**；**USDT（Solana 網路）正在排期中，暫不支援**。
+4. **新增收款錢包**：填入你的 USDT（TRON TRC20 或 Solana SPL）收款地址。
+   > 💡 群主配置的收款錢包，即潛在群員的支付方式。**目前支援 USDT（TRON TRC20 與 Solana SPL）交易**；**USDT（BSC 網路）正在開發中，暫不支援**。
 5. **配置群組**：勾選錢包、設定**入群價格**與**服務時長（天數）**，然後**開啟託管模式**。
 
 配置完成，你的群就正式進入「自動收費」狀態了。
@@ -228,7 +228,7 @@ Hibuddy 的計費單位叫**鑽石（Diamond）**，這是群主這邊的「餘�
 #### 第二步：日常營運（基本無感）
 
 - 成員付款後系統自動對帳、放行，**你錢包即時收到全額 USDT**。
-- 每成交一單，系統按固定費率扣你一點鑽石作為服務費，沒有成交不扣。
+- 每成交一單，系統按 **5% 費率計算**扣你鑽石作為服務費（不滿 1 顆按 1 顆算，低單價時會有明示上浮），沒有成交不扣。
 - 成員到期由系統自動移出，你無需手動管理。
 
 #### 第三步：按需操作
@@ -242,9 +242,9 @@ Hibuddy 的計費單位叫**鑽石（Diamond）**，這是群主這邊的「餘�
 
 ### 七、限時福利
 
-> 🎁 **目前機器人中可以無限循環領取 30 顆鑽石**，夠你先把群跑起來、零成本試水。
+> 🎁 **限時在機器人中可領取 30 顆鑽石**，夠你先把群跑起來、零成本試水。
 >
-> 後續如果關閉了無限領取渠道，大概率會給老用戶做實在的補貼（具體怎麼補，大家一起想想）。
+> 限時領取結束後，大概率會給老用戶做實在的補貼（具體怎麼補，大家一起想想）。
 >
 > 一句話：**現在進來就是賺到，早鳥不虧。**
 
@@ -279,21 +279,21 @@ Hibuddy — это **бот платного входа**, работающий 
 
 Весь процесс полностью автоматизирован — владельцу не нужно следить за группой, сверять выписки, вручную добавлять или удалять людей.
 
-В настоящее время поддерживается приём **USDT (сеть TRC20)**, интерфейс доступен на **английском / китайском / русском / испанском**.
+В настоящее время поддерживается приём **USDT (TRON TRC20 и Solana SPL)**, интерфейс доступен на **английском / китайском / русском / испанском**.
 
 ### 2. Зачем мы это сделали
 
-На рынке немало инструментов для платных групп и подписочного контента (InviteMember, Whop, Patreon и др.), но у них есть общие недостатки:
+На рынке немало инструментов для платных групп и подписочного контента, но у них есть общие недостатки:
 
-- **Слишком дорого**: обычно начинаются с **ежемесячной / подписочной платы** — например, InviteMember стоит десятки долларов в месяц, независимо от того, есть ли у вас продажи.
-- **Высокая и непрозрачная комиссия платформы**: платформы вроде Whop и Patreon **берут процент** с платежей участников; деньги сначала поступают на платформу, затем перечисляются вам, и часто непонятно, сколько именно было удержано.
+- **Слишком дорого**: обычно начинаются с **ежемесячной / подписочной платы** — нередко десятки долларов в месяц, независимо от того, есть ли у вас продажи.
+- **Высокая и непрозрачная комиссия платформы**: большинство платформ **берут процент** с платежей участников; деньги сначала поступают на платформу, затем перечисляются вам, и часто непонятно, сколько именно было удержано.
 - **Недружелюбно к небольшим владельцам (важно)**: для тех, кто только начинает и имеет мало участников, одна лишь ежемесячная плата — это фиксированное бремя.
 
 **Hibuddy стремится к противоположному:**
 
 - **Без ежемесячной платы, без подписки** — расходы возникают только тогда, когда участник действительно совершает сделку.
 - **100% денег участника идут на кошелёк владельца** — платформа не прикасается к ним и не берёт процент с участников.
-- Платформа удерживает лишь небольшую комиссию с алмазного баланса владельца по **фиксированной низкой ставке** в момент завершения заказа — **прозрачно, предсказуемо, без скрытых платежей**.
+- Платформа удерживает комиссию с алмазного баланса владельца **по ставке 5%** (сумма менее 1 алмаза округляется до 1 алмаза; при низкой цене применяется явно указанная надбавка) в момент завершения заказа — **прозрачно, предсказуемо, без скрытых платежей**.
 
 Одной фразой: **платите только за совершённые сделки, деньги идут напрямую владельцу, ставка прозрачна.**
 
@@ -308,20 +308,20 @@ Hibuddy — это **бот платного входа**, работающий 
 | Ручная сверка и добавление участников после оплаты | Владелец проверяет каждый платёж, затем приглашает вручную | Автоматически определяет поступление, мгновенно отправляет ссылку-приглашение |
 | Неплательщики проникают в группу | Ручной обход | Пропускаются только участники с действующим сроком |
 | Участники с истёкшим сроком остаются | Вручную отслеживать время, вручную удалять | Автоматическое удаление по истечении |
-| Давление ежемесячной платы / комиссии платформы | Фиксированная ежемесячная плата + комиссия | Без ежемесячной платы; фиксированная ставка только при завершении |
+| Давление ежемесячной платы / комиссии платформы | Фиксированная ежемесячная плата + комиссия | Без ежемесячной платы; расчёт по ставке 5% только при завершении (менее 1 алмаза округляется до 1; при низкой цене — явная надбавка) |
 | Опасения по поводу удержания средств платформой | Деньги сначала на платформе, затем перечисляются | Деньги идут напрямую на кошелёк владельца |
 
 ### 4. Как это работает сейчас
 
 Единица расчёта Hibuddy называется **Алмаз (Diamond)** — это «баланс» на стороне владельца. Логика проста:
 
-> 💎 **1 алмаз ≈ 0,1 USD** (т.е. $1 ≈ 10 алмазов).
+> 💎 **1 алмаз ≈ 0,1 USD** (т.е. 1 USD ≈ 10 алмазов).
 
 - Владелец **пополняет алмазы** (через USDT, с бонусами за пополнение).
-- Когда участник платит за вход, деньги идут **в полном объёме на кошелёк владельца**; платформа удерживает комиссию за этот заказ с алмазов владельца по **фиксированной ставке** (сейчас ~5%) в момент завершения.
+- Когда участник платит за вход, деньги идут **в полном объёме на кошелёк владельца**; платформа удерживает комиссию за этот заказ с алмазов владельца **по ставке 5%** (менее 1 алмаза считается как 1 алмаз; при низкой цене — явно указанная надбавка) в момент завершения.
 - Нет сделки — нет комиссии, и никакой ежемесячной платы.
 
-Например: группа установила плату за вход **$20**. Участник платит $20 (полностью на кошелёк владельца), платформа удерживает эквивалент $1 (около **10 алмазов**) с владельца как комиссию по ставке 5%. Фактически владелец получает $20 участника.
+Например: группа установила плату за вход **20 USD**. Участник платит 20 USD (полностью на кошелёк владельца), платформа удерживает эквивалент 1 USD (около **10 алмазов**) с владельца как комиссию по ставке 5%. Фактически владелец получает 20 USD участника.
 
 После оплаты бот автоматически определяет, к какому заказу относится платёж, по **точной сумме до цента** (на один кошелёк одновременно приходят переводы от многих людей); после совпадения доступ предоставляется немедленно. Поэтому на странице оплаты есть особое напоминание: **переводите точную сумму, указанную на странице**.
 
@@ -332,12 +332,12 @@ Hibuddy — это **бот платного входа**, работающий 
 1. **Войдите в бота**: нажмите **реферальную ссылку**, которой поделился владелец, или найдите `@hibuddy_ai_bot` в Telegram и отправьте `/start`.
 2. **Выберите группу**: бот покажет список платных групп, в которые можно вступить, с **платой за вход** и **сроком обслуживания**; выберите нужную.
 3. **Оформите заказ и оплатите**: после выбора способа оплаты вы попадёте на страницу оплаты с **точной суммой в USDT** и **адресом получения / QR-кодом**.
-4. **Переведите**: откройте кошелёк (TronLink, Trust Wallet, Binance и др.), выберите **сеть TRC20** и отправьте **точную сумму, указанную на странице**.
+4. **Переведите**: откройте кошелёк (TronLink, Trust Wallet, Binance и др.), выберите **соответствующую сеть (TRON TRC20 или Solana SPL)** и отправьте **точную сумму, указанную на странице**.
 5. **Дождитесь автоматического доступа**: страница автоматически определит поступление — **никаких дополнительных действий не требуется**. После подтверждения вы получите **одноразовую ссылку-приглашение**; нажмите, чтобы войти.
 
 ⚠️ Несколько напоминаний:
 - Заказ **действителен 15 минут**; если время вышло, не оплачивайте — просто оформите новый заказ.
-- Обязательно переводите **точную сумму со страницы** и используйте **правильную сеть TRC20**, иначе платёж может не определиться / это может привести к потере средств.
+- Обязательно переводите **точную сумму со страницы** и используйте **правильную сеть (TRON TRC20 / Solana SPL)**, иначе платёж может не определиться / это может привести к потере средств.
 - **Платёж идёт напрямую на кошелёк владельца** — никаких дополнительных комиссий, кроме указанной платы за вход.
 
 ### 6. Что делать владельцу группы
@@ -348,8 +348,8 @@ Hibuddy — это **бот платного входа**, работающий 
    → После входа бот **автоматически привязывается к вам** (к тому, кто его пригласил), без дополнительной проверки.
 2. **Напишите боту лично** и отправьте `/start`.
 3. Нажмите **«Я владелец группы»**, чтобы перейти на страницу управления группой.
-4. **Добавьте кошелёк для приёма**: укажите ваш адрес получения USDT (TRC20).
-   > 💡 Кошелёк, настроенный владельцем, — это способ оплаты для потенциальных участников. **Сейчас поддерживается USDT (сеть TRC20)**; **USDT (сеть Solana) в планах, но пока не поддерживается**.
+4. **Добавьте кошелёк для приёма**: укажите ваш адрес получения USDT (TRON TRC20 или Solana SPL).
+   > 💡 Кошелёк, настроенный владельцем, — это способ оплаты для потенциальных участников. **Сейчас поддерживается USDT (TRON TRC20 и Solana SPL)**; **USDT (сеть BSC) в разработке, но пока не поддерживается**.
 5. **Настройте группу**: выберите кошелёк, задайте **цену входа** и **срок обслуживания (в днях)**, затем **включите режим хостинга**.
 
 После настройки ваша группа официально переходит в режим «автоматического взимания».
@@ -357,7 +357,7 @@ Hibuddy — это **бот платного входа**, работающий 
 #### Шаг 2: Повседневная работа (практически незаметно)
 
 - После оплаты участника система автоматически сверяет и предоставляет доступ; **ваш кошелёк мгновенно получает полную сумму в USDT**.
-- За каждый завершённый заказ система удерживает с вас немного алмазов по фиксированной ставке как комиссию — нет сделки, нет удержания.
+- За каждый завершённый заказ система удерживает с вас алмазы по ставке 5% как комиссию (менее 1 алмаза считается как 1 алмаз; при низкой цене — явно указанная надбавка) — нет сделки, нет удержания.
 - Участники с истёкшим сроком автоматически удаляются системой; вам не нужно управлять вручную.
 
 #### Шаг 3: Действия по необходимости
@@ -371,9 +371,9 @@ Hibuddy — это **бот платного входа**, работающий 
 
 ### 7. Ограниченное предложение
 
-> 🎁 **Сейчас в боте можно бесконечно получать по 30 алмазов** — этого достаточно, чтобы запустить группу и попробовать без затрат.
+> 🎁 **Сейчас в боте можно получить 30 алмазов — акция ограничена по времени** — этого достаточно, чтобы запустить группу и попробовать без затрат.
 >
-> Если позже канал бесконечного получения будет закрыт, мы, скорее всего, сделаем действующим пользователям существенную субсидию (как именно — давайте подумаем вместе).
+> Когда окно ограниченного получения закроется, мы, скорее всего, сделаем действующим пользователям существенную субсидию (как именно — давайте подумаем вместе).
 >
 > Одной фразой: **войти сейчас — это выгода; ранние участники не прогадают.**
 
@@ -408,21 +408,21 @@ En pocas palabras, hace tres cosas por los administradores de grupos:
 
 Todo el proceso es completamente automático — el administrador no necesita vigilar el grupo, conciliar estados de cuenta ni añadir/eliminar gente manualmente.
 
-Actualmente admite **USDT (red TRC20)** para pagos, y la interfaz está disponible en **inglés / chino / ruso / español**.
+Actualmente admite **USDT (TRON TRC20 y Solana SPL)** para pagos, y la interfaz está disponible en **inglés / chino / ruso / español**.
 
 ### 2. Por qué lo creamos
 
-Hay muchas herramientas para grupos de pago y contenido por suscripción (InviteMember, Whop, Patreon, etc.), pero comparten puntos débiles:
+Hay muchas herramientas para grupos de pago y contenido por suscripción en el mercado actual, pero comparten puntos débiles:
 
-- **Demasiado caras**: suelen empezar con una **cuota mensual / de suscripción** — por ejemplo, InviteMember cuesta decenas de dólares al mes, vendas o no.
-- **Comisiones de plataforma altas y opacas**: plataformas como Whop y Patreon **retienen un porcentaje** de lo que pagan los miembros; los pagos van primero a la plataforma y luego se te liquidan, y a menudo no está claro cuánto se descontó.
+- **Demasiado caras**: suelen empezar con una **cuota mensual / de suscripción** — a menudo decenas de dólares al mes, vendas o no.
+- **Comisiones de plataforma altas y opacas**: la mayoría de plataformas **retienen un porcentaje** de lo que pagan los miembros; los pagos van primero a la plataforma y luego se te liquidan, y a menudo no está claro cuánto se descontó.
 - **Poco amigables con los administradores pequeños (importante)**: para quien empieza y tiene pocos miembros, solo la cuota mensual ya es una carga fija.
 
 **Hibuddy busca lo contrario:**
 
 - **Sin cuota mensual, sin suscripción** — los costes solo se generan cuando un miembro realmente completa una transacción.
 - **El 100% del dinero del miembro va a la billetera del administrador** — la plataforma nunca lo toca ni retiene un porcentaje de los miembros.
-- La plataforma solo descuenta una pequeña comisión del saldo de diamantes del administrador a una **tarifa fija baja** cuando se completa un pedido — **transparente, predecible, sin cargos ocultos**.
+- La plataforma solo descuenta una comisión del saldo de diamantes del administrador **calculada al 5%** cuando se completa un pedido (lo que no alcance 1 diamante se redondea a 1 diamante; a bajo unitario hay un recargo expresamente indicado) — **transparente, predecible, sin cargos ocultos**.
 
 En una frase: **pagas solo cuando vendes, el dinero va directo al administrador y la tarifa es transparente.**
 
@@ -437,20 +437,20 @@ Puntos débiles clave que resuelve:
 | Conciliación y añadido manual de miembros tras el pago | El administrador revisa cada pago y luego invita manualmente | Detecta la llegada automáticamente y envía al instante el enlace de invitación |
 | Los que no pagan se cuelan en el grupo | Patrulla manual | Solo se admite a miembros dentro del periodo válido |
 | Los miembros caducados se quedan | Controlar el tiempo y expulsar manualmente | Eliminación automática al caducar |
-| Presión por cuota mensual / comisión de plataforma | Cuota mensual fija + comisión | Sin cuota mensual; tarifa fija solo al completar |
+| Presión por cuota mensual / comisión de plataforma | Cuota mensual fija + comisión | Sin cuota mensual; cálculo al 5% solo al completar (menos de 1 diamante cuenta como 1; a bajo precio, recargo indicado) |
 | Inquietud por la plataforma reteniendo fondos | El dinero va primero a la plataforma y luego se liquida | El dinero va directo a la billetera del administrador |
 
 ### 4. Cómo funciona ahora
 
 La unidad de facturación de Hibuddy se llama **Diamante** — es el «saldo» del lado del administrador. La lógica es sencilla:
 
-> 💎 **1 diamante ≈ 0,1 USD** (es decir, $1 ≈ 10 diamantes).
+> 💎 **1 diamante ≈ 0,1 USD** (es decir, 1 USD ≈ 10 diamantes).
 
 - El administrador **recarga diamantes** (con USDT, con bonos por recarga).
-- Cuando un miembro paga por entrar, el dinero va **íntegro a la billetera del administrador**; la plataforma solo descuenta la comisión de ese pedido de los diamantes del administrador a una **tarifa fija** (ahora ~5%) en el momento de completarse.
+- Cuando un miembro paga por entrar, el dinero va **íntegro a la billetera del administrador**; la plataforma solo descuenta la comisión de ese pedido de los diamantes del administrador **calculada al 5%** (menos de 1 diamante cuenta como 1 diamante; a bajo unitario se indica un recargo expreso) en el momento de completarse.
 - Sin transacción no hay cargo, y ninguna cuota mensual.
 
-Por ejemplo: un grupo fija la tarifa de entrada en **$20**. Un miembro paga $20 (íntegro a la billetera del administrador), y la plataforma descuenta el equivalente a $1 (unos **10 diamantes**) del administrador como comisión al 5%. El administrador recibe realmente los $20 del miembro.
+Por ejemplo: un grupo fija la tarifa de entrada en **20 USD**. Un miembro paga 20 USD (íntegro a la billetera del administrador), y la plataforma descuenta el equivalente a 1 USD (unos **10 diamantes**) del administrador como comisión al 5%. El administrador recibe realmente los 20 USD del miembro.
 
 Tras pagar, el bot identifica automáticamente a qué pedido corresponde mediante el **importe exacto al céntimo** (la misma billetera recibe transferencias de mucha gente a la vez); una vez coincidido, concede acceso de inmediato. Por eso la página de pago recuerda especialmente: **transfiere el importe exacto que muestra la página**.
 
@@ -461,12 +461,12 @@ En cuanto a la caducidad, el bot recuerda renovar antes de caducar y elimina aut
 1. **Entra en el bot**: toca el **enlace de promoción** compartido por el administrador, o busca `@hibuddy_ai_bot` en Telegram y envía `/start`.
 2. **Elige un grupo**: el bot lista los grupos de pago a los que puedes unirte, mostrando la **tarifa de entrada** y la **duración del servicio**; toca el que quieras.
 3. **Haz el pedido y paga**: tras elegir un método de pago, entras en la página de pago, que muestra el **importe exacto en USDT** y la **dirección de recepción / código QR**.
-4. **Transfiere**: abre tu billetera (TronLink, Trust Wallet, Binance, etc.), elige la **red TRC20** y envía el **importe exacto que muestra la página**.
+4. **Transfiere**: abre tu billetera (TronLink, Trust Wallet, Binance, etc.), elige la **red correspondiente (TRON TRC20 o Solana SPL)** y envía el **importe exacto que muestra la página**.
 5. **Espera el acceso automático**: la página detecta automáticamente la llegada — **no se necesita ninguna acción extra**. Tras la confirmación recibirás un **enlace de invitación de un solo uso**; toca para entrar.
 
 ⚠️ Algunos recordatorios:
 - Los pedidos son **válidos durante 15 minutos**; si caduca, no pagues — simplemente haz un pedido nuevo.
-- Asegúrate de transferir el **importe exacto de la página** y usar la **red TRC20 correcta**, o puede que no se detecte automáticamente / cause una pérdida.
+- Asegúrate de transferir el **importe exacto de la página** y usar la **red correcta (TRON TRC20 / Solana SPL)**, o puede que no se detecte automáticamente / cause una pérdida.
 - **El pago va directo a la billetera del administrador** — sin cargos extra más allá de la tarifa de entrada mostrada.
 
 ### 6. Como administrador de grupo, ¿qué hago?
@@ -477,8 +477,8 @@ En cuanto a la caducidad, el bot recuerda renovar antes de caducar y elimina aut
    → Tras entrar, el bot **se vincula automáticamente a ti** (a quien lo invitó), sin verificación adicional.
 2. **Escribe al bot en privado** y envía `/start`.
 3. Toca **«Soy administrador de grupo»** para entrar en la página de gestión del grupo.
-4. **Añade una billetera de recepción**: introduce tu dirección de recepción de USDT (TRC20).
-   > 💡 La billetera configurada por el administrador es el método de pago para los miembros potenciales. **Ahora admite USDT (red TRC20)**; **USDT (red Solana) está planificado pero aún no se admite**.
+4. **Añade una billetera de recepción**: introduce tu dirección de recepción de USDT (TRON TRC20 o Solana SPL).
+   > 💡 La billetera configurada por el administrador es el método de pago para los miembros potenciales. **Ahora admite USDT (TRON TRC20 y Solana SPL)**; **USDT (red BSC) está en desarrollo pero aún no se admite**.
 5. **Configura el grupo**: selecciona la billetera, fija el **precio de entrada** y la **duración del servicio (días)**, y luego **activa el modo de gestión**.
 
 Una vez configurado, tu grupo entra oficialmente en estado de «cobro automático».
@@ -486,7 +486,7 @@ Una vez configurado, tu grupo entra oficialmente en estado de «cobro automátic
 #### Paso 2: Operación diaria (prácticamente sin esfuerzo)
 
 - Tras el pago de un miembro, el sistema concilia y concede acceso automáticamente; **tu billetera recibe el USDT completo al instante**.
-- Por cada pedido completado, el sistema te descuenta un poco de diamantes a una tarifa fija como comisión — sin transacción, sin descuento.
+- Por cada pedido completado, el sistema te descuenta diamantes **calculados al 5%** como comisión (menos de 1 diamante cuenta como 1 diamante; a bajo unitario hay un recargo expreso) — sin transacción, sin descuento.
 - Los miembros caducados se eliminan automáticamente; no necesitas gestionar manualmente.
 
 #### Paso 3: Acciones bajo demanda
@@ -500,9 +500,9 @@ Una vez configurado, tu grupo entra oficialmente en estado de «cobro automátic
 
 ### 7. Oferta por tiempo limitado
 
-> 🎁 **Ahora puedes reclamar 30 diamantes en bucle ilimitado en el bot** — suficiente para poner en marcha tu grupo y probarlo sin coste.
+> 🎁 **Ahora puedes reclamar 30 diamantes en el bot — oferta por tiempo limitado** — suficiente para poner en marcha tu grupo y probarlo sin coste.
 >
-> Si más adelante se cierra el canal de reclamación ilimitada, lo más probable es que demos a los usuarios antiguos una subvención sólida (cómo exactamente — pensadlo con nosotros).
+> Cuando se cierre este periodo de reclamación limitada, lo más probable es que demos a los usuarios antiguos una subvención sólida (cómo exactamente — pensadlo con nosotros).
 >
 > En una frase: **entrar ahora es ganar; los que llegan pronto no pierden.**
 
